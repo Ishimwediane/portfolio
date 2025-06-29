@@ -10,7 +10,7 @@ const socialLinks = [
 ];
 
 // Backend URL configuration
-const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
+const BACKEND_URL = 'https://portfolio-server-yhrm.onrender.com';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
