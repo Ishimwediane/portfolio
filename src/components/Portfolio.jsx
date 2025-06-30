@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { BiInfoCircle } from 'react-icons/bi';
+import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 // Import images
 import alarmImg from '../assets/alarm.jpg';
 import telegramImg from '../assets/telegram.webp';
@@ -9,9 +10,22 @@ import imvunwaImg from '../assets/imvunwa.png';
 import imvunwa1Img from '../assets/imvunwa1.png';
 import shehope1Img from '../assets/shehope1.png';
 import shehope2Img from '../assets/shehope2.png';
-import ecardImg from '../assets/ecard.png';
-import eshop1Img from '../assets/eshop1.jpg';
-import eshop2Img from '../assets/eshop2.jpg';
+
+import botigaImg from '../assets/botiga1.png';
+import botiga1Img from '../assets/botiga2.png';
+import pighealthImg from '../assets/pig1.png';
+import pighealth1Img from '../assets/pig2.jpg';
+
+import club1Img from '../assets/club1.png';
+import club2Img from '../assets/club2.png';
+import club3Img from '../assets/club3.png';  
+import bughetImg from '../assets/budget1.jpg';
+import bughet1Img from '../assets/budget2.jpg';
+import bughet2Img from '../assets/budget3.jpg';
+import eshop2Img from '../assets/eshop1.jpg';
+import eshop1Img from '../assets/eshop2.jpg';
+
+
 
 const portfolioItems = [
   {
@@ -21,7 +35,6 @@ const portfolioItems = [
     description: 'Gate Guard visitor notifie',
     details: {
       category: 'Embedded System',
-      course: 'ICT chamber',
       date: '01 March, 2024',
       info: `System is an IoT solution that uses a combination of OLED displays, Telegram notifications, and remote control functionality to manage visitor access. When a visitor presses a button at the gate, an OLED screen displays their presence. The system sends a Telegram notification to the homeowner's phone, notifying them of the visitor's arrival. If the homeowner is not available, they can reply via Telegram, and the response is displayed on the OLED screen, informing the visitor.`
     }
@@ -34,7 +47,6 @@ const portfolioItems = [
     description: 'Air Quality Monitor',
     details: {
       category: 'Embedded System',
-      course: 'IoT Lab',
       date: '15 April, 2024',
       info: 'A project to monitor air quality using sensors and display data on a dashboard.'
     }
@@ -44,33 +56,37 @@ const portfolioItems = [
     category: 'WEB',
     img: [imvunwaImg, imvunwa1Img],
     description: 'Business Website',
+    github: null,
+    liveDemo: 'https://www.imvunwa.com',
     details: {
       category: 'Web',
-      course: 'Personal Project',
       date: 'May 2024',
       info: 'A responsive business website for Imvunwa, showcasing welding, manufacturing, and electrical services.'
     }
   },
   {
-    title: 'SheHope – Unplanned Pregnancy Support Platform',
+    title: 'SheHope Unplanned Pregnancy Support Platform',
     category: 'WEB',
     img: [shehope1Img, shehope2Img],
     description: 'Support Platform',
+    github: 'https://github.com/Ishimwediane/Shehope',
+    githubServer: 'https://github.com/Ishimwediane/shehope_server',
+    liveDemo: 'https://shehope.vercel.app/',
     details: {
       category: 'Web/Mobile',
-      course: 'Personal Project',
       date: '2024',
-      info: `Built a React Native mobile app and a Node.js/Express backend with MongoDB. Implemented user authentication, anonymous chat with community, personalized action plans, and crowdfunding for financial support.`
+      info: `Built a React website and a Node.js/Express backend with MongoDB. Implemented user authentication, anonymous chat with community, personalized action plans, and crowdfunding for financial support.`
     }
   },
   {
-    title: 'Botiga – eCommerce Platform',
+    title: 'Botiga  eCommerce Platform',
     category: 'WEB',
-    img: [imvunwaImg],
+    img: [botigaImg, botiga1Img],
     description: 'eCommerce Platform',
+    github: 'https://github.com/Ishimwediane/Botiga-ecommerce',
+    liveDemo: 'https://botiga-ecommerce-dun.vercel.app/',
     details: {
       category: 'Web',
-      course: 'Personal Project',
       date: '2024',
       info: `Developed a dashboard for admins and vendors using React.js, Tailwind CSS, and Node.js. Implemented user authentication, product management, and vendor listing features.`
     }
@@ -78,37 +94,53 @@ const portfolioItems = [
   {
     title: 'pigHealth Rwanda',
     category: 'WEB',
-    img: [imvunwaImg],
+    img: [pighealthImg, pighealth1Img],
     description: 'Pig Health Management System',
+    github: 'https://github.com/Ishimwediane/Pig-Health',
+    liveDemo: 'https://pig-health.vercel.app/',
     details: {
       category: 'Web',
-      course: 'Personal Project',
       date: '2024',
-      info: 'A web-based system for managing pig health and veterinary services in Rwanda.'
+      info: 'A web-based system for managing pig health and veterinary services in Rwanda. The system allows users to manage their pigs, including adding, editing, and deleting pigs, as well as viewing pig health records and veterinary services.This system is built with React.js, Tailwind CSS, postgreSQL, and Laravel.'
     }
   },
   {
-    title: 'Bughet management',
+    title: 'Budget Management',
     category: 'APP',
-    img: [ecardImg],
+    img: [bughetImg, bughet1Img, bughet2Img],
     description: 'Budget Management App',
+    github: 'https://github.com/Ishimwediane/Budget_management',
+    liveDemo: null,
     details: {
       category: 'App',
-      course: 'Personal Project',
       date: '2024',
-      info: 'A mobile app for managing personal and business budgets.'
+      info: 'A mobile app for managing personal and business budgets. This app is built with React Native, Expo, and Node.js.'
     }
   },
   {
-    title: 'Eshop',
+    title: 'Eshop App',
     category: 'APP',
     img: [eshop1Img, eshop2Img],
     description: 'E-commerce App',
+    github: 'https://github.com/Ishimwediane/Eshop_app',
+    liveDemo: null,
     details: {
       category: 'App',
-      course: 'Personal Project',
       date: '2024',
-      info: 'A mobile e-commerce app for online shopping and order management.'
+      info: 'A mobile e-commerce app for online shopping and order management.App is built with React Native, Expo, and Node.js.'
+    }
+  },
+  {
+    title: 'Club Management',
+    category: 'APP',
+    img: [ club1Img, club2Img, club3Img],
+    description: 'Club Management App',
+    github: 'https://github.com/Ishimwediane/Club',
+    liveDemo: null,
+    details: {
+      category: 'App',
+      date: '2024',
+      info: 'mobile app for managing Abeho club events, attendance, finance, and announcements.App is built with Flutter, firebase and Node.js.'
     }
   }
 ];
@@ -202,8 +234,42 @@ const Portfolio = () => {
               <div className="md:w-1/3 w-full p-6 flex flex-col justify-center">
                 <h3 className="text-2xl font-bold mb-2">{modal.item.description}</h3>
                 <div className="mb-2"><span className="font-bold">Category:</span> {modal.item.details.category}</div>
-                <div className="mb-2"><span className="font-bold">Short courses:</span> {modal.item.details.course}</div>
                 <div className="mb-2"><span className="font-bold">Project date:</span> {modal.item.details.date}</div>
+                
+                {/* GitHub and Live Demo Links */}
+                <div className="mb-4 flex flex-wrap gap-2">
+                  {modal.item.github && (
+                    <a 
+                      href={modal.item.github} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 bg-gray-800 hover:bg-gray-700 text-white px-3 py-2 rounded text-sm transition"
+                    >
+                      <FaGithub /> GitHub
+                    </a>
+                  )}
+                  {modal.item.githubServer && (
+                    <a 
+                      href={modal.item.githubServer} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 bg-gray-800 hover:bg-gray-700 text-white px-3 py-2 rounded text-sm transition"
+                    >
+                      <FaGithub /> Server
+                    </a>
+                  )}
+                  {modal.item.liveDemo && (
+                    <a 
+                      href={modal.item.liveDemo} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-3 py-2 rounded text-sm transition"
+                    >
+                      <FaExternalLinkAlt /> Live Demo
+                    </a>
+                  )}
+                </div>
+                
                 <div className="mb-2"><span className="font-bold">Project information:</span></div>
                 <div className="text-gray-200 whitespace-pre-line">{modal.item.details.info}</div>
               </div>
