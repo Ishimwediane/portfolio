@@ -1,46 +1,84 @@
-import React from 'react';
-import { useTheme } from '../context/ThemeContext';
+import { Moon, Sun } from "lucide-react";
+import { useTheme } from "../context/ThemeContext";
 
-const ThemeToggle = () => {
-  const { darkMode, toggleTheme } = useTheme();
+export default function ThemeToggle({ variant = "floating", size = "md", className = "" }) {
+  const { theme, toggleTheme } = useTheme();
+
+  const sizeClasses = {
+    sm: "w-8 h-8 p-1.5",
+    md: "w-12 h-12 p-2.5",
+    lg: "w-16 h-16 p-3.5",
+  };
+
+  const iconSizes = {
+    sm: "w-4 h-4",
+    md: "w-6 h-6",
+    lg: "w-8 h-8",
+  };
+
+  const baseClasses = `
+    relative rounded-full border-2 border-yellow-400 
+    transition-all duration-300 ease-in-out
+    hover:scale-110 hover:shadow-lg hover:shadow-yellow-400/25
+    focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2
+    active:scale-95
+    ${sizeClasses[size]}
+    ${
+      theme === "dark"
+        ? "bg-black text-yellow-400 hover:bg-yellow-400/10 focus:ring-offset-black"
+        : "bg-white text-yellow-900 hover:bg-yellow-400/10 focus:ring-offset-white"
+    }
+  `;
+
+  const variantClasses = {
+    floating: "fixed top-4 right-4 z-50 shadow-xl",
+    inline: "inline-flex",
+    navbar: "inline-flex",
+  };
 
   return (
     <button
       onClick={toggleTheme}
-      className="fixed top-4 right-4 p-2 rounded-lg bg-gray-200 dark:bg-gray-700 transition-colors duration-200"
-      aria-label="Toggle theme"
+      className={`${baseClasses} ${variantClasses[variant]} ${className}`}
+      aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+      title={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
     >
-      {darkMode ? (
-        <svg
-          className="w-6 h-6 text-yellow-500"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
-          />
-        </svg>
-      ) : (
-        <svg
-          className="w-6 h-6 text-gray-900"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
-          />
-        </svg>
-      )}
+      {/* Background circle animation */}
+      <div
+        className={`
+          absolute inset-0 rounded-full bg-yellow-400 transition-all duration-300 ease-in-out
+          ${theme === "dark" ? "scale-0 opacity-0" : "scale-100 opacity-20"}
+        `}
+      />
+
+      {/* Icon container with rotation animation */}
+      <div className="relative flex items-center justify-center w-full h-full">
+        {/* Sun icon */}
+        <Sun
+          className={`
+            ${iconSizes[size]} absolute transition-all duration-300 ease-in-out
+            ${theme === "dark" ? "rotate-90 scale-0 opacity-0" : "rotate-0 scale-100 opacity-100"}
+          `}
+        />
+
+        {/* Moon icon */}
+        <Moon
+          className={`
+            ${iconSizes[size]} absolute transition-all duration-300 ease-in-out
+            ${theme === "dark" ? "rotate-0 scale-100 opacity-100" : "-rotate-90 scale-0 opacity-0"}
+          `}
+        />
+      </div>
+
+      {/* Ripple effect on click */}
+      <div className="absolute inset-0 rounded-full overflow-hidden">
+        <div
+          className={`
+            absolute inset-0 bg-yellow-400 rounded-full transition-all duration-300 ease-out
+            scale-0 opacity-0 hover:scale-100 hover:opacity-10
+          `}
+        />
+      </div>
     </button>
   );
-};
-
-export default ThemeToggle; 
+} 

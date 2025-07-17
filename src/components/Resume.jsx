@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
-import profileImg from '../assets/smile.jpg'; // Replace with your actual image if different
+import profileImg from '../assets/smile.jpg';
 
 const summary = {
   name: 'DIANE ISHIMWE',
@@ -11,19 +11,20 @@ const summary = {
   ],
 };
 
-// Skill proficiency (0-100)
+// Grouped skills (original)
 const skills = [
   { group: 'Programming Languages', items: [
-    { name: 'Python', value: 90 },
-    { name: 'Java', value: 80 },
-    { name: 'JavaScript', value: 85 },
+    { name: 'Python', value: 70 }, // Advanced
+    { name: 'Java', value: 70 }, // Advanced
+    { name: 'JavaScript', value: 70 }, // Advanced
     { name: 'TypeScript', value: 70 },
     { name: 'Dart (Flutter)', value: 65 },
   ]},
   { group: 'Frontend', items: [
     { name: 'React', value: 85 },
-    { name: 'React Native', value: 80 },
+    { name: 'React Native', value: 70 }, // Advanced
     { name: 'Flutter', value: 65 },
+    { name: 'Next.js', value: 70 }, // Advanced
   ]},
   { group: 'Backend', items: [
     { name: 'Node.js', value: 80 },
@@ -31,18 +32,12 @@ const skills = [
     { name: 'Laravel', value: 60 },
   ]},
   { group: 'Databases', items: [
-    { name: 'MongoDB', value: 75 },
+    { name: 'MongoDB', value: 85 }, // Expert
     { name: 'PostgreSQL', value: 70 },
   ]},
   { group: 'Embedded Systems & Industrial Automation', items: [
     { name: 'Embedded Systems', value: 80 },
     { name: 'Industrial Automation', value: 70 },
-  ]},
-  { group: 'Mobile App Development', items: [
-    { name: 'Mobile App Development', value: 80 },
-  ]},
-  { group: 'Web Development', items: [
-    { name: 'Web Development', value: 85 },
   ]},
   { group: 'Version Control', items: [
     { name: 'Git', value: 85 },
@@ -85,6 +80,21 @@ const experience = [
   },
 ];
 
+const education = [
+  {
+    school: 'Carnegie Mellon University Africa',
+    degree: 'Bridge Program',
+    date: '2024',
+    description: 'Completed the Bridge Program focused on advanced computer science topics.'
+  },
+  {
+    school: 'University of Rwanda',
+    degree: 'BSc in Electronics and Telecommunication',
+    date: '2019 - 2023',
+    description: 'Graduated with honors, specialized in embedded systems and IoT.'
+  },
+];
+
 const awards = [
   { name: 'Fullstack Course Certificate – kLab (2024–2025)', link: null },
   { name: 'Embedded Systems Course Certificate – ICT Chamber (2024–2025)', link: 'https://drive.google.com/file/d/1DXennapqJATfpIq-AKhjsAL-uwmkQ3ic/view?usp=sharing' },
@@ -93,103 +103,97 @@ const awards = [
   { name: 'Bridge Program-Carnegie Mellon University(2024)', link: null },
 ];
 
-const Resume = () => {
-  const [highlighted, setHighlighted] = useState(null);
-  const expRefs = useRef([]);
+function getSkillLevelLabel(value) {
+  if (value >= 80) return 'Expert';
+  if (value >= 60) return 'Advanced';
+  if (value >= 40) return 'Intermediate';
+  return 'Beginner';
+}
 
-  useEffect(() => {
-    const handleScroll = () => {
-      expRefs.current.forEach((ref, idx) => {
-        if (ref) {
-          const rect = ref.getBoundingClientRect();
-          if (rect.top < window.innerHeight / 2 && rect.bottom > window.innerHeight / 2) {
-            setHighlighted(idx);
-          }
-        }
-      });
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  return (
-    <section id="resume" className="flex-1 bg-black text-white min-h-screen flex flex-col items-center justify-start px-4 py-12 overflow-auto">
-      <div className="w-full max-w-6xl bg-[#111] rounded-lg shadow-lg p-8 mb-12">
-        <div className="mb-8 flex flex-col items-center">
-          <img src={profileImg} alt="Diane Ishimwe" className="rounded-full w-32 h-32 object-cover mb-4 border-4 border-green-500" />
-          <span className="uppercase tracking-widest text-gray-300 text-sm font-semibold">Resume <span className="inline-block align-middle ml-2 w-16 h-1 bg-green-500"></span></span>
-          <h2 className="text-4xl md:text-5xl font-extrabold mt-2 mb-6">CHECK MY RESUME</h2>
+const Timeline = ({ items, type }) => (
+  <div className="relative pl-8 border-l-2 border-gray-700">
+    {items.map((item, idx) => (
+      <div key={item.title || item.school || item.name} className="mb-12">
+        <div className="flex items-center mb-2">
+          <span className="w-4 h-4 bg-green-500 rounded-full absolute -left-2"></span>
+          <span className={
+            type === 'experience' || type === 'education'
+              ? 'text-white text-xl font-bold ml-4'
+              : 'text-white text-lg font-bold ml-4'
+          }>
+            {type === 'experience' ? item.title : type === 'education' ? item.school : item.name}
+            {type === 'award' && item.link && (
+              <a href={item.link} target="_blank" rel="noopener noreferrer" className="text-green-400 underline ml-2">View</a>
+            )}
+          </span>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          {/* Summary & Skills */}
-          <div>
-            <h3 className="text-3xl font-bold mb-8">Summary</h3>
-            <div className="relative pl-8 border-l-2 border-gray-700 mb-8">
-              <div className="mb-8">
-                <div className="flex items-center mb-2">
-                  <span className="w-4 h-4 bg-green-500 rounded-full absolute -left-2"></span>
-                  <span className="text-green-500 text-xl font-bold ml-4">{summary.name}</span>
-                </div>
-                <p className="italic text-gray-100 mb-4 ml-4">{summary.description}</p>
-                <ul className="list-disc ml-8 text-lg space-y-1">
-                  {summary.contacts.map((c) => <li key={c}>{c}</li>)}
-                </ul>
-              </div>
-            </div>
-            <h3 className="text-3xl font-bold mb-8">Skills</h3>
-            <div className="mb-8">
-              {skills.map((group, i) => (
-                <div key={group.group} className="mb-8">
-                  <div className="font-bold uppercase mb-2">{group.group}</div>
-                  {group.items.length > 0 ? (
-                    group.items.map(skill => (
-                      <div key={skill.name} className="mb-2">
-                        <div className="w-full h-3 bg-gray-800 rounded">
-                          <div className="h-3 rounded bg-green-500" style={{ width: `${skill.value}%` }}></div>
-                        </div>
-                        <span className="ml-2 text-gray-200">{skill.name}</span>
-                      </div>
-                    ))
-                  ) : null}
-                </div>
-              ))}
-            </div>
+        {type !== 'award' && (
+          <div className="ml-4 mb-2">
+            <span className="bg-gray-800 text-white px-4 py-2 rounded font-bold text-lg">
+              {item.date}
+            </span>
           </div>
-          {/* Experience & Awards */}
-          <div>
-            <h3 className="text-3xl font-bold mb-8">Experience</h3>
-            <div className="relative pl-8 border-l-2 border-gray-700 mb-12">
-              {experience.map((exp, idx) => (
-                <div
-                  key={exp.title}
-                  className={`mb-12 transition-all duration-300 ${highlighted === idx ? 'bg-[#1a1a1a] shadow-lg' : ''}`}
-                  ref={el => expRefs.current[idx] = el}
-                >
-                  <div className="flex items-center mb-2">
-                    <span className={`w-4 h-4 rounded-full absolute -left-2 transition-all duration-300 ${highlighted === idx ? 'bg-green-400 scale-125 shadow-lg' : 'bg-green-500'}`}></span>
-                    <span className={`text-xl font-bold ml-4 transition-all duration-300 ${highlighted === idx ? 'text-green-400' : 'text-green-500'}`}>{exp.title}</span>
+        )}
+        <div className="ml-4 text-gray-100 whitespace-pre-line">
+          {type === 'experience' ? item.description :
+            type === 'education' ? (
+              <>
+                <div className="font-semibold text-white mb-1">{item.degree}</div>
+                <div>{item.description}</div>
+              </>
+            ) : null}
+        </div>
+      </div>
+    ))}
+  </div>
+);
+
+const Resume = () => {
+  return (
+    <section className="max-w-5xl mx-auto p-6 bg-[#111] text-white">
+      {/* Centered profile image only */}
+      <div className="flex justify-center mb-12">
+        <img src={profileImg} alt="Diane Ishimwe" className="rounded-full w-28 h-28 object-cover border-4 border-green-500" />
+      </div>
+      {/* Experience & Education+Awards side by side */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+        {/* Experience timeline */}
+        <div>
+          <h2 className="text-3xl font-bold mb-6">Experience</h2>
+          <Timeline items={experience} type="experience" />
+        </div>
+        {/* Education timeline and Awards timeline */}
+        <div>
+          <h2 className="text-3xl font-bold mb-6">Education</h2>
+          <Timeline items={education} type="education" />
+          {/* Awards below education, as timeline */}
+          <h2 className="text-2xl font-bold mb-4 mt-8">Awards & Certifications</h2>
+          <Timeline items={awards} type="award" />
+        </div>
+      </div>
+      {/* Skills full width, grouped, name above bar */}
+      <div className="bg-[#111] p-8 rounded-2xl">
+        <h2 className="text-lg tracking-widest font-medium mb-2 text-gray-400 relative">
+          SKILLS
+          <span className="inline-block w-24 h-1 bg-green-400 ml-4 align-middle rounded"></span>
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
+          {skills.map((group) => (
+            <div key={group.group} className="mb-8">
+              <div className="font-bold uppercase mb-2">{group.group}</div>
+              {group.items.length > 0 && group.items.map(skill => (
+                <div key={skill.name} className="mb-4">
+                  <div className="flex justify-between mb-1">
+                    <span className="ml-1 text-gray-200 font-semibold">{skill.name}</span>
                   </div>
-                  <div className="ml-4 mb-2">
-                    <span className="bg-gray-800 text-white px-4 py-2 rounded font-bold text-lg">{exp.date}</span>
+                  <div className="w-full h-3 bg-gray-800 rounded relative">
+                    <div className="h-3 rounded bg-green-500" style={{ width: `${skill.value}%` }}></div>
+                    <span className="absolute right-2 top-1/2 -translate-y-1/2 text-xs font-semibold text-white">{getSkillLevelLabel(skill.value)}</span>
                   </div>
-                  <div className="ml-4 text-gray-100 whitespace-pre-line">{exp.description}</div>
                 </div>
               ))}
             </div>
-            {/* Awards & Certifications Section */}
-            <h3 className="text-3xl font-bold mb-8">Awards & Certifications</h3>
-            <ul className="space-y-4">
-              {awards.map((award, i) => (
-                <li key={award.name} className="flex items-center gap-4">
-                  <span className="font-bold text-lg">{award.name}</span>
-                  {award.link && (
-                    <a href={award.link} target="_blank" rel="noopener noreferrer" className="text-green-400 underline ml-2">View</a>
-                  )}
-                </li>
-              ))}
-            </ul>
-          </div>
+          ))}
         </div>
       </div>
     </section>

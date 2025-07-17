@@ -1,11 +1,8 @@
 import React from 'react';
-import { useTheme } from '../context/ThemeContext';
 
 const Home = () => {
-  const { darkMode } = useTheme();
-  
   return (
-    <aside className={`min-h-screen w-full md:w-1/3 ${darkMode ? 'bg-gray-900' : 'bg-[#040b14]'} text-white flex flex-col justify-center px-8 py-12 md:fixed md:left-0 md:top-0 md:bottom-0 md:w-80 z-20 transition-colors duration-200`}>
+    <aside className="min-h-screen w-full md:w-1/3 bg-[#040b14] text-white flex flex-col justify-center px-8 py-12 md:fixed md:left-0 md:top-0 md:bottom-0 md:w-80 z-20">
       <div>
         <h1 className="text-4xl md:text-5xl font-bold tracking-wider mb-2">ISHIMWE Diane</h1>
         <h2 className="text-xl md:text-2xl font-light mb-8">I am a passionate software engineer</h2>

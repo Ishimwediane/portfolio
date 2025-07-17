@@ -1,7 +1,6 @@
 import React from 'react';
 import smile from '../assets/smile.jpg';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
-import { useTheme } from '../context/ThemeContext';
 
 const githubUrl = 'https://github.com/Ishimwediane';
 const linkedinUrl = 'https://www.linkedin.com/in/ishimwe-diane-187701261/'; // Replace with your actual LinkedIn if different
@@ -18,11 +17,9 @@ const interests = [
 ];
 
 const About = () => {
-  const { darkMode } = useTheme();
-  
   return (
-    <section id="about" className={`flex-1 ${darkMode ? 'bg-gray-900' : 'bg-black'} text-white min-h-screen flex flex-col items-center justify-start px-4 py-12 overflow-auto transition-colors duration-200`}>
-      <div className={`w-full max-w-5xl ${darkMode ? 'bg-gray-800' : 'bg-[#111]'} rounded-lg shadow-lg p-8 mb-12 transition-colors duration-200`}>
+    <section id="about" className="flex-1 bg-black text-white min-h-screen flex flex-col items-center justify-start px-4 py-12 overflow-auto">
+      <div className="w-full max-w-5xl bg-[#111] rounded-lg shadow-lg p-8 mb-12">
         <div className="mb-8">
           <span className="uppercase tracking-widest text-gray-300 text-sm font-semibold">About <span className="inline-block align-middle ml-2 w-16 h-1 bg-green-500"></span></span>
           <h2 className="text-4xl md:text-5xl font-extrabold mt-2 mb-6">LEARN MORE ABOUT ME</h2>
@@ -53,13 +50,13 @@ const About = () => {
         </div>
       </div>
       {/* Interests Section */}
-      <div className={`w-full max-w-5xl ${darkMode ? 'bg-gray-800' : 'bg-[#111]'} rounded-lg shadow-lg p-8 mb-12 transition-colors duration-200`}>
+      <div className="w-full max-w-5xl bg-[#111] rounded-lg shadow-lg p-8 mb-12">
         <div className="mb-8">
           <span className="uppercase tracking-widest text-gray-300 text-sm font-semibold">Interests <span className="inline-block align-middle ml-2 w-16 h-1 bg-green-500"></span></span>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {interests.map((interest) => (
-            <div key={interest.label} className={`flex items-center gap-4 ${darkMode ? 'bg-gray-700' : 'bg-[#181818]'} rounded-lg p-4 shadow text-lg font-semibold transition-colors duration-200`}>
+            <div key={interest.label} className="flex items-center gap-4 bg-[#181818] rounded-lg p-4 shadow text-lg font-semibold">
               <i className={`${interest.icon} ${interest.color} text-3xl`}></i>
               <span>{interest.label}</span>
             </div>
