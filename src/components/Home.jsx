@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+import { Typewriter } from 'react-simple-typewriter';
 
 const sections = [
   { id: 'home', label: 'Home' },
@@ -66,9 +67,17 @@ const Home = () => {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 0.7 }}
-          className="text-xl md:text-2xl font-light mb-8"
+          className="text-xl md:text-2xl font-light mb-8 min-h-[2.5rem]"
         >
-          I am a passionate software engineer
+          <Typewriter
+            words={["I am a passionate software engineer"]}
+            loop={false}
+            cursor
+            cursorStyle='|'
+            typeSpeed={60}
+            deleteSpeed={40}
+            delaySpeed={1500}
+          />
         </motion.h2>
         <motion.nav className="mb-8">
           <motion.ul

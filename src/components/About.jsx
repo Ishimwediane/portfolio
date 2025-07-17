@@ -39,6 +39,23 @@ const About = () => {
       viewport={{ once: true, amount: 0.2 }}
       variants={containerVariants}
     >
+      {/* Animated SVG Wave Divider */}
+      <motion.svg
+        initial={{ opacity: 0, y: -30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, ease: 'easeOut' }}
+        className="w-full h-16 md:h-24 -mt-8 mb-4"
+        viewBox="0 0 1440 320"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        preserveAspectRatio="none"
+      >
+        <path
+          fill="#fff"
+          fillOpacity="1"
+          d="M0,160L60,170.7C120,181,240,203,360,197.3C480,192,600,160,720,154.7C840,149,960,171,1080,181.3C1200,192,1320,192,1380,192L1440,192L1440,0L1380,0C1320,0,1200,0,1080,0C960,0,840,0,720,0C600,0,480,0,360,0C240,0,120,0,60,0L0,0Z"
+        />
+      </motion.svg>
       <motion.div className="w-full max-w-5xl bg-[#111] rounded-lg shadow-lg p-8 mb-12" variants={itemVariants}>
         <div className="mb-8">
           <motion.span className="uppercase tracking-widest text-gray-300 text-sm font-semibold" variants={itemVariants}>

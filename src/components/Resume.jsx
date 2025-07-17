@@ -123,6 +123,17 @@ const itemVariants = {
   show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } }
 };
 
+const AnimatedSkillBar = ({ value }) => (
+  <motion.div
+    className="h-3 rounded bg-green-500"
+    initial={{ width: 0 }}
+    whileInView={{ width: value + '%' }}
+    viewport={{ once: true, amount: 0.5 }}
+    transition={{ duration: 1, ease: 'easeOut' }}
+    style={{ minWidth: 0 }}
+  />
+);
+
 const Timeline = ({ items, type }) => (
   <motion.div className="relative pl-8 border-l-2 border-gray-700" variants={containerVariants} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }}>
     {items.map((item, idx) => (
@@ -171,6 +182,23 @@ const Resume = () => {
       viewport={{ once: true, amount: 0.2 }}
       variants={containerVariants}
     >
+      {/* Animated SVG Wave Divider */}
+      <motion.svg
+        initial={{ opacity: 0, y: -30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, ease: 'easeOut' }}
+        className="w-full h-16 md:h-24 -mt-8 mb-4"
+        viewBox="0 0 1440 320"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        preserveAspectRatio="none"
+      >
+        <path
+          fill="#fff"
+          fillOpacity="1"
+          d="M0,160L60,170.7C120,181,240,203,360,197.3C480,192,600,160,720,154.7C840,149,960,171,1080,181.3C1200,192,1320,192,1380,192L1440,192L1440,0L1380,0C1320,0,1200,0,1080,0C960,0,840,0,720,0C600,0,480,0,360,0C240,0,120,0,60,0L0,0Z"
+        />
+      </motion.svg>
       {/* Centered profile image only */}
       <motion.div className="flex justify-center mb-12" variants={itemVariants}>
         <img src={profileImg} alt="Diane Ishimwe" className="rounded-full w-28 h-28 object-cover border-4 border-green-500" />
@@ -207,7 +235,7 @@ const Resume = () => {
                     <span className="ml-1 text-gray-200 font-semibold">{skill.name}</span>
                   </div>
                   <div className="w-full h-3 bg-gray-800 rounded relative">
-                    <div className="h-3 rounded bg-green-500" style={{ width: `${skill.value}%` }}></div>
+                    <AnimatedSkillBar value={skill.value} />
                     <span className="absolute right-2 top-1/2 -translate-y-1/2 text-xs font-semibold text-white">{getSkillLevelLabel(skill.value)}</span>
                   </div>
                 </motion.div>
