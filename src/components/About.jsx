@@ -1,6 +1,7 @@
 import React from 'react';
 import smile from '../assets/smile.jpg';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
+import { motion } from 'framer-motion';
 
 const githubUrl = 'https://github.com/Ishimwediane';
 const linkedinUrl = 'https://www.linkedin.com/in/ishimwe-diane-187701261/'; // Replace with your actual LinkedIn if different
@@ -16,19 +17,42 @@ const interests = [
   { icon: 'ri-price-tag-2-line', color: 'text-indigo-500', label: 'Watching movie' },
 ];
 
+const containerVariants = {
+  hidden: { opacity: 0, y: 40 },
+  show: {
+    opacity: 1, y: 0,
+    transition: { staggerChildren: 0.15, delayChildren: 0.2, duration: 0.7, ease: 'easeOut' }
+  }
+};
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } }
+};
+
 const About = () => {
   return (
-    <section id="about" className="flex-1 bg-black text-white min-h-screen flex flex-col items-center justify-start px-4 py-12 overflow-auto">
-      <div className="w-full max-w-5xl bg-[#111] rounded-lg shadow-lg p-8 mb-12">
+    <motion.section
+      id="about"
+      className="flex-1 bg-black text-white min-h-screen flex flex-col items-center justify-start px-4 py-12 overflow-auto"
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true, amount: 0.2 }}
+      variants={containerVariants}
+    >
+      <motion.div className="w-full max-w-5xl bg-[#111] rounded-lg shadow-lg p-8 mb-12" variants={itemVariants}>
         <div className="mb-8">
-          <span className="uppercase tracking-widest text-gray-300 text-sm font-semibold">About <span className="inline-block align-middle ml-2 w-16 h-1 bg-green-500"></span></span>
-          <h2 className="text-4xl md:text-5xl font-extrabold mt-2 mb-6">LEARN MORE ABOUT ME</h2>
+          <motion.span className="uppercase tracking-widest text-gray-300 text-sm font-semibold" variants={itemVariants}>
+            About <span className="inline-block align-middle ml-2 w-16 h-1 bg-green-500"></span>
+          </motion.span>
+          <motion.h2 className="text-4xl md:text-5xl font-extrabold mt-2 mb-6" variants={itemVariants}>
+            LEARN MORE ABOUT ME
+          </motion.h2>
         </div>
-        <div className="flex flex-col md:flex-row gap-8 items-center">
-          <div className="flex-shrink-0 w-full md:w-1/3 flex justify-center">
+        <motion.div className="flex flex-col md:flex-row gap-8 items-center" variants={itemVariants}>
+          <motion.div className="flex-shrink-0 w-full md:w-1/3 flex justify-center" variants={itemVariants}>
             <img src={smile} alt="Diane Ishimwe" className="rounded-lg object-cover w-64 h-80 shadow-md" />
-          </div>
-          <div className="flex-1">
+          </motion.div>
+          <motion.div className="flex-1" variants={itemVariants}>
             <h3 className="text-green-500 text-2xl font-bold mb-2">Software Engineer</h3>
             <p className="italic text-gray-200 mb-6">
               I am Diane Ishimwe, a passionate and versatile software engineer with experience in web, mobile, and embedded systems development. I enjoy building impactful solutions and collaborating with teams to deliver high-quality products.
@@ -46,24 +70,26 @@ const About = () => {
                 </li>
               </ul>
             </div>
-          </div>
-        </div>
-      </div>
+          </motion.div>
+        </motion.div>
+      </motion.div>
       {/* Interests Section */}
-      <div className="w-full max-w-5xl bg-[#111] rounded-lg shadow-lg p-8 mb-12">
+      <motion.div className="w-full max-w-5xl bg-[#111] rounded-lg shadow-lg p-8 mb-12" variants={itemVariants}>
         <div className="mb-8">
-          <span className="uppercase tracking-widest text-gray-300 text-sm font-semibold">Interests <span className="inline-block align-middle ml-2 w-16 h-1 bg-green-500"></span></span>
+          <motion.span className="uppercase tracking-widest text-gray-300 text-sm font-semibold" variants={itemVariants}>
+            Interests <span className="inline-block align-middle ml-2 w-16 h-1 bg-green-500"></span>
+          </motion.span>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <motion.div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" variants={containerVariants}>
           {interests.map((interest) => (
-            <div key={interest.label} className="flex items-center gap-4 bg-[#181818] rounded-lg p-4 shadow text-lg font-semibold">
+            <motion.div key={interest.label} className="flex items-center gap-4 bg-[#181818] rounded-lg p-4 shadow text-lg font-semibold" variants={itemVariants}>
               <i className={`${interest.icon} ${interest.color} text-3xl`}></i>
               <span>{interest.label}</span>
-            </div>
+            </motion.div>
           ))}
-        </div>
-      </div>
-    </section>
+        </motion.div>
+      </motion.div>
+    </motion.section>
   );
 };
 

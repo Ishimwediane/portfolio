@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { BiInfoCircle } from 'react-icons/bi';
 import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
+import { motion } from 'framer-motion';
 // Import images
 import alarmImg from '../assets/alarm.jpg';
 import telegramImg from '../assets/telegram.webp';
@@ -147,6 +148,18 @@ const portfolioItems = [
 
 const filters = ['ALL', 'IOT', 'WEB', 'APP'];
 
+const containerVariants = {
+  hidden: { opacity: 0, scale: 0.95 },
+  show: {
+    opacity: 1, scale: 1,
+    transition: { staggerChildren: 0.13, delayChildren: 0.2, duration: 0.7, ease: 'easeOut' }
+  }
+};
+const itemVariants = {
+  hidden: { opacity: 0, y: 40, scale: 0.95 },
+  show: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.6, ease: 'easeOut' } }
+};
+
 const Portfolio = () => {
   const [activeFilter, setActiveFilter] = useState('ALL');
   const [modal, setModal] = useState({ open: false, type: '', item: null, imgIdx: 0 });
@@ -158,8 +171,15 @@ const Portfolio = () => {
   const showNextImg = () => setModal(m => ({ ...m, imgIdx: m.imgIdx < m.item.img.length - 1 ? m.imgIdx + 1 : 0 }));
 
   return (
-    <section id="portfolio" className="flex-1 bg-black text-white min-h-screen flex flex-col items-center justify-start px-4 py-12 overflow-auto">
-      <div className="w-full max-w-6xl bg-[#111] rounded-lg shadow-lg p-8 mb-12">
+    <motion.section
+      id="portfolio"
+      className="flex-1 bg-black text-white min-h-screen flex flex-col items-center justify-start px-4 py-12 overflow-auto"
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true, amount: 0.2 }}
+      variants={containerVariants}
+    >
+      <motion.div className="w-full max-w-6xl bg-[#111] rounded-lg shadow-lg p-8 mb-12" variants={itemVariants}>
         <div className="mb-8">
           <span className="uppercase tracking-widest text-gray-300 text-sm font-semibold">Portfolio <span className="inline-block align-middle ml-2 w-16 h-1 bg-green-500"></span></span>
           <h2 className="text-4xl md:text-5xl font-extrabold mt-2 mb-6">MY WORKS</h2>
@@ -175,9 +195,9 @@ const Portfolio = () => {
             </button>
           ))}
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <motion.div className="grid grid-cols-1 md:grid-cols-3 gap-8" variants={containerVariants}>
           {filteredItems.map((item, idx) => (
-            <div key={idx} className="relative group rounded-lg overflow-hidden shadow-lg bg-black">
+            <motion.div key={idx} className="relative group rounded-lg overflow-hidden shadow-lg bg-black" variants={itemVariants}>
               <img src={item.img[0]} alt={item.title} className="w-full h-64 object-cover" />
               {/* Overlay on hover */}
               <div className="absolute inset-0 bg-black bg-opacity-70 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -196,11 +216,11 @@ const Portfolio = () => {
                 <div className="text-2xl font-bold">{item.title}</div>
                 <div className="text-green-400">{item.category}</div>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
-      </div>
-      {/* Modal for details */}
+        </motion.div>
+      </motion.div>
+      {/* Modal for details (no animation for modal for now) */}
       {modal.open && (
         <div className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50">
           <div className="bg-[#181818] rounded-lg p-0 max-w-4xl w-full relative flex flex-col md:flex-row overflow-hidden">
@@ -277,7 +297,7 @@ const Portfolio = () => {
           </div>
         </div>
       )}
-    </section>
+    </motion.section>
   );
 };
 

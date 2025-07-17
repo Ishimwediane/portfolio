@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FaMapMarkerAlt, FaEnvelope, FaPhoneAlt, FaTwitter, FaFacebook, FaInstagram, FaLinkedin, FaGithub, FaShareAlt } from 'react-icons/fa';
+import { motion } from 'framer-motion';
 
 const socialLinks = [
   { href: 'https://twitter.com/ishimwediane400', icon: <FaTwitter /> },
@@ -11,6 +12,18 @@ const socialLinks = [
 
 // Backend URL configuration
 const BACKEND_URL = 'https://portfolio-server-yhrm.onrender.com';
+
+const containerVariants = {
+  hidden: { opacity: 0, y: 40 },
+  show: {
+    opacity: 1, y: 0,
+    transition: { staggerChildren: 0.15, delayChildren: 0.2, duration: 0.7, ease: 'easeOut' }
+  }
+};
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } }
+};
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -75,15 +88,26 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="flex-1 bg-black text-white min-h-screen flex flex-col items-center justify-start px-4 py-12 overflow-auto">
-      <div className="w-full max-w-6xl bg-[#111] rounded-lg shadow-lg p-8 mb-12">
+    <motion.section
+      id="contact"
+      className="flex-1 bg-black text-white min-h-screen flex flex-col items-center justify-start px-4 py-12 overflow-auto"
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true, amount: 0.2 }}
+      variants={containerVariants}
+    >
+      <motion.div className="w-full max-w-6xl bg-[#111] rounded-lg shadow-lg p-8 mb-12" variants={itemVariants}>
         <div className="mb-8">
-          <span className="uppercase tracking-widest text-gray-300 text-sm font-semibold">Contact <span className="inline-block align-middle ml-2 w-16 h-1 bg-green-500"></span></span>
-          <h2 className="text-4xl md:text-5xl font-extrabold mt-2 mb-6">CONTACT ME</h2>
+          <motion.span className="uppercase tracking-widest text-gray-300 text-sm font-semibold" variants={itemVariants}>
+            Contact <span className="inline-block align-middle ml-2 w-16 h-1 bg-green-500"></span>
+          </motion.span>
+          <motion.h2 className="text-4xl md:text-5xl font-extrabold mt-2 mb-6" variants={itemVariants}>
+            CONTACT ME
+          </motion.h2>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-          <div className="flex flex-col gap-8">
-            <div className="flex items-center bg-[#181818] rounded-lg p-8 shadow">
+        <motion.div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8" variants={containerVariants}>
+          <motion.div className="flex flex-col gap-8" variants={itemVariants}>
+            <motion.div className="flex items-center bg-[#181818] rounded-lg p-8 shadow" variants={itemVariants}>
               <div className="bg-[#222] rounded-full p-5 mr-6 flex items-center justify-center">
                 <FaMapMarkerAlt className="text-green-500 text-3xl" />
               </div>
@@ -91,8 +115,8 @@ const Contact = () => {
                 <div className="text-xl font-bold text-gray-200">My Address</div>
                 <div className="text-lg">Kigali,Rwanda</div>
               </div>
-            </div>
-            <div className="flex items-center bg-[#181818] rounded-lg p-8 shadow">
+            </motion.div>
+            <motion.div className="flex items-center bg-[#181818] rounded-lg p-8 shadow" variants={itemVariants}>
               <div className="bg-[#222] rounded-full p-5 mr-6 flex items-center justify-center">
                 <FaEnvelope className="text-green-500 text-3xl" />
               </div>
@@ -100,10 +124,10 @@ const Contact = () => {
                 <div className="text-xl font-bold text-gray-200">Email Me</div>
                 <div className="text-lg">ishimwediane400@gmail.com</div>
               </div>
-            </div>
-          </div>
-          <div className="flex flex-col gap-8">
-            <div className="flex items-center bg-[#181818] rounded-lg p-8 shadow">
+            </motion.div>
+          </motion.div>
+          <motion.div className="flex flex-col gap-8" variants={itemVariants}>
+            <motion.div className="flex items-center bg-[#181818] rounded-lg p-8 shadow" variants={itemVariants}>
               <div className="bg-[#222] rounded-full p-5 mr-6 flex items-center justify-center">
                 <FaShareAlt className="text-green-500 text-3xl" />
               </div>
@@ -117,8 +141,8 @@ const Contact = () => {
                   ))}
                 </div>
               </div>
-            </div>
-            <div className="flex items-center bg-[#181818] rounded-lg p-8 shadow">
+            </motion.div>
+            <motion.div className="flex items-center bg-[#181818] rounded-lg p-8 shadow" variants={itemVariants}>
               <div className="bg-[#222] rounded-full p-5 mr-6 flex items-center justify-center">
                 <FaPhoneAlt className="text-green-500 text-3xl" />
               </div>
@@ -126,12 +150,15 @@ const Contact = () => {
                 <div className="text-xl font-bold text-gray-200">Call Me</div>
                 <div className="text-lg">+250790755673</div>
               </div>
-            </div>
-          </div>
-        </div>
-        
-        <form onSubmit={handleSubmit} className="bg-[#181818] rounded-lg p-8 shadow max-w-2xl mx-auto flex flex-col gap-6">
-          <div className="flex flex-col md:flex-row gap-6">
+            </motion.div>
+          </motion.div>
+        </motion.div>
+        <motion.form
+          onSubmit={handleSubmit}
+          className="bg-[#181818] rounded-lg p-8 shadow max-w-2xl mx-auto flex flex-col gap-6"
+          variants={containerVariants}
+        >
+          <motion.div className="flex flex-col md:flex-row gap-6" variants={itemVariants}>
             <input 
               type="text" 
               name="name" 
@@ -152,8 +179,8 @@ const Contact = () => {
               required 
               disabled={status === 'sending'}
             />
-          </div>
-          <input 
+          </motion.div>
+          <motion.input 
             type="text" 
             name="subject" 
             placeholder="Subject" 
@@ -162,8 +189,9 @@ const Contact = () => {
             className="p-3 rounded bg-[#222] text-white focus:outline-none focus:ring-2 focus:ring-green-500" 
             required 
             disabled={status === 'sending'}
+            variants={itemVariants}
           />
-          <textarea 
+          <motion.textarea 
             name="message" 
             rows="5" 
             placeholder="Message" 
@@ -172,16 +200,15 @@ const Contact = () => {
             className="p-3 rounded bg-[#222] text-white focus:outline-none focus:ring-2 focus:ring-green-500" 
             required 
             disabled={status === 'sending'}
+            variants={itemVariants}
           />
-          
           {/* Status Message */}
           {statusMessage && (
-            <div className={`p-3 rounded text-center ${getStatusColor()} bg-[#222]`}>
+            <motion.div className={`p-3 rounded text-center ${getStatusColor()} bg-[#222]`} variants={itemVariants}>
               {statusMessage}
-            </div>
+            </motion.div>
           )}
-          
-          <button 
+          <motion.button 
             type="submit" 
             disabled={status === 'sending'}
             className={`font-bold py-3 px-8 rounded transition ${
@@ -189,12 +216,13 @@ const Contact = () => {
                 ? 'bg-gray-500 cursor-not-allowed' 
                 : 'bg-green-500 hover:bg-green-600'
             }`}
+            variants={itemVariants}
           >
             {status === 'sending' ? 'Sending...' : 'Send Message'}
-          </button>
-        </form>
-      </div>
-    </section>
+          </motion.button>
+        </motion.form>
+      </motion.div>
+    </motion.section>
   );
 };
 

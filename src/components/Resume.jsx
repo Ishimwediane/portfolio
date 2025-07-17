@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import profileImg from '../assets/smile.jpg';
+import { motion } from 'framer-motion';
 
 const summary = {
   name: 'DIANE ISHIMWE',
@@ -110,10 +111,22 @@ function getSkillLevelLabel(value) {
   return 'Beginner';
 }
 
+const containerVariants = {
+  hidden: { opacity: 0, y: 40 },
+  show: {
+    opacity: 1, y: 0,
+    transition: { staggerChildren: 0.15, delayChildren: 0.2, duration: 0.7, ease: 'easeOut' }
+  }
+};
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } }
+};
+
 const Timeline = ({ items, type }) => (
-  <div className="relative pl-8 border-l-2 border-gray-700">
+  <motion.div className="relative pl-8 border-l-2 border-gray-700" variants={containerVariants} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }}>
     {items.map((item, idx) => (
-      <div key={item.title || item.school || item.name} className="mb-12">
+      <motion.div key={item.title || item.school || item.name} className="mb-12" variants={itemVariants}>
         <div className="flex items-center mb-2">
           <span className="w-4 h-4 bg-green-500 rounded-full absolute -left-2"></span>
           <span className={
@@ -143,46 +156,53 @@ const Timeline = ({ items, type }) => (
               </>
             ) : null}
         </div>
-      </div>
+      </motion.div>
     ))}
-  </div>
+  </motion.div>
 );
 
 const Resume = () => {
   return (
-    <section className="max-w-5xl mx-auto p-6 bg-[#111] text-white">
+    <motion.section
+      id="resume"
+      className="max-w-5xl mx-auto p-6 bg-[#111] text-white"
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true, amount: 0.2 }}
+      variants={containerVariants}
+    >
       {/* Centered profile image only */}
-      <div className="flex justify-center mb-12">
+      <motion.div className="flex justify-center mb-12" variants={itemVariants}>
         <img src={profileImg} alt="Diane Ishimwe" className="rounded-full w-28 h-28 object-cover border-4 border-green-500" />
-      </div>
+      </motion.div>
       {/* Experience & Education+Awards side by side */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+      <motion.div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12" variants={containerVariants}>
         {/* Experience timeline */}
-        <div>
-          <h2 className="text-3xl font-bold mb-6">Experience</h2>
+        <motion.div variants={itemVariants}>
+          <motion.h2 className="text-3xl font-bold mb-6" variants={itemVariants}>Experience</motion.h2>
           <Timeline items={experience} type="experience" />
-        </div>
+        </motion.div>
         {/* Education timeline and Awards timeline */}
-        <div>
-          <h2 className="text-3xl font-bold mb-6">Education</h2>
+        <motion.div variants={itemVariants}>
+          <motion.h2 className="text-3xl font-bold mb-6" variants={itemVariants}>Education</motion.h2>
           <Timeline items={education} type="education" />
           {/* Awards below education, as timeline */}
-          <h2 className="text-2xl font-bold mb-4 mt-8">Awards & Certifications</h2>
+          <motion.h2 className="text-2xl font-bold mb-4 mt-8" variants={itemVariants}>Awards & Certifications</motion.h2>
           <Timeline items={awards} type="award" />
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
       {/* Skills full width, grouped, name above bar */}
-      <div className="bg-[#111] p-8 rounded-2xl">
-        <h2 className="text-lg tracking-widest font-medium mb-2 text-gray-400 relative">
+      <motion.div className="bg-[#111] p-8 rounded-2xl" variants={itemVariants}>
+        <motion.h2 className="text-lg tracking-widest font-medium mb-2 text-gray-400 relative" variants={itemVariants}>
           SKILLS
           <span className="inline-block w-24 h-1 bg-green-400 ml-4 align-middle rounded"></span>
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
+        </motion.h2>
+        <motion.div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8" variants={containerVariants}>
           {skills.map((group) => (
-            <div key={group.group} className="mb-8">
+            <motion.div key={group.group} className="mb-8" variants={itemVariants}>
               <div className="font-bold uppercase mb-2">{group.group}</div>
               {group.items.length > 0 && group.items.map(skill => (
-                <div key={skill.name} className="mb-4">
+                <motion.div key={skill.name} className="mb-4" variants={itemVariants}>
                   <div className="flex justify-between mb-1">
                     <span className="ml-1 text-gray-200 font-semibold">{skill.name}</span>
                   </div>
@@ -190,13 +210,13 @@ const Resume = () => {
                     <div className="h-3 rounded bg-green-500" style={{ width: `${skill.value}%` }}></div>
                     <span className="absolute right-2 top-1/2 -translate-y-1/2 text-xs font-semibold text-white">{getSkillLevelLabel(skill.value)}</span>
                   </div>
-                </div>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           ))}
-        </div>
-      </div>
-    </section>
+        </motion.div>
+      </motion.div>
+    </motion.section>
   );
 };
 
