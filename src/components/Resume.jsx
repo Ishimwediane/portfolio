@@ -83,16 +83,16 @@ const experience = [
 
 const education = [
   {
-    school: 'Carnegie Mellon University Africa',
-    degree: 'Bridge Program',
-    date: '2024',
-    description: 'Completed the Bridge Program focused on advanced computer science topics.'
+    school: 'university of rwanda ',
+    degree: 'Bachelor of Computer and software engeneering',
+    date: '2022--2026',
+    description: 'Final year student with a focus on software development, data structures,embedded sytems and Iot'
   },
   {
-    school: 'University of Rwanda',
-    degree: 'BSc in Electronics and Telecommunication',
-    date: '2019 - 2023',
-    description: 'Graduated with honors, specialized in embedded systems and IoT.'
+    school: 'Ecole secondaire saint vincent Muhoza',
+    degree: 'Advanced Level - Physics, Mathematics, and computer science',
+    date: '2018 - 2021',
+    description: 'i have studied physics mathematics and computer science where I gained a solid foundation in problem-solving, analytical thinking, and programming concepts.'
   },
 ];
 
