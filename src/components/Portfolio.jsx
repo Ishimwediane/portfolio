@@ -26,6 +26,10 @@ import bughet2Img from '../assets/budget3.jpg';
 import eshop2Img from '../assets/eshop1.jpg';
 import eshop1Img from '../assets/eshop2.jpg';
 
+import veteritechImg from '../assets/veteritech.png';
+import veteritech1Img from '../assets/veteritech1.png';
+import veteritech2Img from '../assets/veteritech2.png';
+
 
 
 const portfolioItems = [
@@ -90,6 +94,20 @@ const portfolioItems = [
       category: 'Web',
       date: '2024',
       info: `Developed a dashboard for admins and vendors using React.js, Tailwind CSS, and Node.js. Implemented user authentication, product management, and vendor listing features.`
+    }
+  },
+  {
+    title: 'VeteriTech - Veterinary & Farmer Platform',
+    category: 'WEB',
+    img: [veteritechImg, veteritech1Img, veteritech2Img],
+    description: 'Vet-Farmer Platform with eCommerce & Live Chat',
+    github: 'https://github.com/Ishimwediane/veteritech',
+    liveDemo: 'https://veteritech-8drl.vercel.app/',
+    details: {
+      category: 'Web',
+      date: '2024',
+      info: `VeteriTech connects farmers with veterinarians for consultations and ongoing animal health support.
+Includes real-time chat between vets and farmers, an e-commerce module for purchasing animal products, and an admin dashboard for managing users, products, and platform activities.`
     }
   },
   {
