@@ -84,9 +84,9 @@ const experience = [
 const education = [
   {
     school: 'university of rwanda ',
-    degree: 'Bachelor of Computer and software engeneering',
+    degree: 'Bachelors in Computer and software engineering',
     date: '2022--2026',
-    description: 'Final year student with a focus on software development, data structures,embedded sytems and Iot'
+    description: 'Final year student with a focus on software development, data structures,embedded systems and Iot'
   },
   {
     school: 'Ecole secondaire saint vincent Muhoza',
@@ -97,11 +97,11 @@ const education = [
 ];
 
 const awards = [
-  { name: 'Fullstack Course Certificate – kLab (2024–2025)', link: null },
+  { name: 'Fullstack Course Certificate – kLab (2024–2025)', link: 'https://drive.google.com/file/d/11pFGA4I1BHah1gHyYNG0ZnqPdS9lPvlH/view?usp=sharing' },
   { name: 'Embedded Systems Course Certificate – ICT Chamber (2024–2025)', link: 'https://drive.google.com/file/d/1DXennapqJATfpIq-AKhjsAL-uwmkQ3ic/view?usp=sharing' },
-  { name: 'Women Professional Development Program – U.S. Embassy (2025)', link: null },
+  { name: 'Women Professional Development Program – U.S. Embassy (2025)', link: 'https://drive.google.com/file/d/1PI5jc4kEat7aEMWBknasbCf9zSAkRVFS/view?usp=sharing' },
   { name: 'Hackathon Finalist(Digital ID Hackthon) – Digital Student eCard (2024)', link: 'https://drive.google.com/file/d/15vDu7Tey_ANDTLGPjAKo9xFyskhT6qW9/view?usp=sharing' },
-  { name: 'Bridge Program-Carnegie Mellon University(2024)', link: null },
+  { name: 'Bridge Program-Carnegie Mellon University(2024)', link: 'https://drive.google.com/file/d/1yuaxlrKwu3PUx_An4_XodCvQaXS-VD9e/view?usp=sharing' },
 ];
 
 function getSkillLevelLabel(value) {
