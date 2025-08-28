@@ -4,7 +4,7 @@ import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 
 const githubUrl = 'https://github.com/Ishimwediane';
-const linkedinUrl = 'https://www.linkedin.com/in/ishimwe-diane-187701261/'; // Replace with your actual LinkedIn if different
+const linkedinUrl = 'https://www.linkedin.com/in/diane-ishimwe-18b56a206/'; // Replace with your actual LinkedIn if different
 
 const interests = [
   { icon: 'ri-store-line', color: 'text-yellow-400', label: 'Reading' },
